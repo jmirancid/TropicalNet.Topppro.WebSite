@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Topppro.Repositories.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Topppro.Repositories.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Assn_CategorySerie">
           <Key>
             <PropertyRef Name="AssnCategorySerieId" />
@@ -27,6 +27,18 @@
           <Property Name="AllowCompare" Type="bit" Nullable="false" />
           <Property Name="Priority" Type="int" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Assn_RegionProduct' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Assn_RegionProduct">
+          <Key>
+            <PropertyRef Name="AssnRegionProductId" />
+            <PropertyRef Name="RegionId" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="AssnRegionProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Attribute">
           <Key>
@@ -144,6 +156,17 @@
           <Property Name="Draft" Type="bit" Nullable="false" />
           <Property Name="Badge" Type="varchar" MaxLength="6" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="2" />
+        </EntityType>
         <EntityType Name="Serie">
           <Key>
             <PropertyRef Name="SerieId" />
@@ -199,7 +222,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Distribut__Count__7F2BE32F">
+        <Association Name="FK__Distribut__Count__4316F928">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="Distributor" Type="Self.Distributor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -211,7 +234,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Distribut__Cultu__00200768">
+        <Association Name="FK__Distribut__Cultu__440B1D61">
           <End Role="Culture" Type="Self.Culture" Multiplicity="1" />
           <End Role="Distributor" Type="Self.Distributor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -378,6 +401,20 @@
           <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Serie" EntityType="Self.Serie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assn_RegionProduct" EntityType="Self.Assn_RegionProduct" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Assn_RegionProduct].[AssnRegionProductId] AS [AssnRegionProductId], 
+    [Assn_RegionProduct].[RegionId] AS [RegionId], 
+    [Assn_RegionProduct].[ProductId] AS [ProductId]
+    FROM [dbo].[Assn_RegionProduct] AS [Assn_RegionProduct]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Region" EntityType="Self.Region" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Region].[RegionId] AS [RegionId], 
+    [Region].[Name] AS [Name], 
+    [Region].[Code] AS [Code]
+    FROM [dbo].[Region] AS [Region]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="Assn_CategorySerie_Assn_CategorySerieProduct_FK" Association="Self.Assn_CategorySerie_Assn_CategorySerieProduct_FK">
             <End Role="Assn_CategorySerie" EntitySet="Assn_CategorySerie" />
             <End Role="Assn_CategorySerieProduct" EntitySet="Assn_CategorySerieProduct" />
@@ -394,11 +431,11 @@
             <End Role="Culture" EntitySet="Culture" />
             <End Role="Bullet" EntitySet="Bullet" />
           </AssociationSet>
-          <AssociationSet Name="FK__Distribut__Count__7F2BE32F" Association="Self.FK__Distribut__Count__7F2BE32F">
+          <AssociationSet Name="FK__Distribut__Count__4316F928" Association="Self.FK__Distribut__Count__4316F928">
             <End Role="Country" EntitySet="Country" />
             <End Role="Distributor" EntitySet="Distributor" />
           </AssociationSet>
-          <AssociationSet Name="FK__Distribut__Cultu__00200768" Association="Self.FK__Distribut__Cultu__00200768">
+          <AssociationSet Name="FK__Distribut__Cultu__440B1D61" Association="Self.FK__Distribut__Cultu__440B1D61">
             <End Role="Culture" EntitySet="Culture" />
             <End Role="Distributor" EntitySet="Distributor" />
           </AssociationSet>
@@ -916,7 +953,28 @@
             <Parameter Name="AssnCategorySerieProductId" Mode="In" Type="Int32" />
             <Parameter Name="Priority" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Assn_RegionProduct" EntityType="Topppro.Repositories.Assn_RegionProduct" />
+          <EntitySet Name="Region" EntityType="Topppro.Repositories.Region" />
         </EntityContainer>
+        <EntityType Name="Assn_RegionProduct">
+          <Key>
+            <PropertyRef Name="AssnRegionProductId" />
+            <PropertyRef Name="RegionId" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="AssnRegionProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1087,6 +1145,24 @@
           <FunctionImportMapping FunctionImportName="Assn_CategorySerie_Reorder" FunctionName="Topppro.Repositories.Store.Assn_CategorySerie_Reorder" />
           <FunctionImportMapping FunctionImportName="Assn_CategorySerieProduct_Insert" FunctionName="Topppro.Repositories.Store.Assn_CategorySerieProduct_Insert" />
           <FunctionImportMapping FunctionImportName="Assn_CategorySerieProduct_Reorder" FunctionName="Topppro.Repositories.Store.Assn_CategorySerieProduct_Reorder" />
+          <EntitySetMapping Name="Assn_RegionProduct">
+            <EntityTypeMapping TypeName="Topppro.Repositories.Assn_RegionProduct">
+              <MappingFragment StoreEntitySet="Assn_RegionProduct">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="AssnRegionProductId" ColumnName="AssnRegionProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="Topppro.Repositories.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

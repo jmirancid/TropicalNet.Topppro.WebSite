@@ -24,6 +24,8 @@ namespace Topppro.WebSite.Controllers
             var categoryId =
                 (int)Enum.Parse(typeof(Topppro.Entities.Category_Enum), controller);
 
+            //get region
+
             var entities =
                 this.BizCategorySerie.AllBy(x => x.CategoryId == categoryId && x.Enabled);
 

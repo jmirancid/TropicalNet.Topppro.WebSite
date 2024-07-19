@@ -44,6 +44,8 @@ namespace Topppro.Repositories
         public virtual DbSet<Platform> Platform { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Serie> Serie { get; set; }
+        public virtual DbSet<Assn_RegionProduct> Assn_RegionProduct { get; set; }
+        public virtual DbSet<Region> Region { get; set; }
     
         public virtual int Assn_CategorySerie_Insert(Nullable<int> categoryId, Nullable<int> serieId, Nullable<int> priority, ObjectParameter id)
         {
