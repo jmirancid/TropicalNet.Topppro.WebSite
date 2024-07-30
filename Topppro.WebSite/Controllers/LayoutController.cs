@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using Topppro.Interfaces.Business;
+using xFNet.Common.Extensions;
+using Topppro.WebSite.Extensions;
+using System.Linq;
+using Microsoft.Ajax.Utilities;
 
 namespace Topppro.WebSite.Controllers
 {
@@ -19,15 +23,26 @@ namespace Topppro.WebSite.Controllers
         }
 
         [OutputCache(CacheProfile = "Medium")]
-        public virtual ActionResult Index(string controller)
+        public virtual ActionResult Index(string region, string controller)
         {
+            var regionId =
+                (int)Enum.Parse(typeof(Topppro.Entities.Region_Enum), region);
+
             var categoryId =
                 (int)Enum.Parse(typeof(Topppro.Entities.Category_Enum), controller);
 
-            //get region
-
+            // Filter categories-series that contains products in region. WARN: All products are included.
             var entities =
-                this.BizCategorySerie.AllBy(x => x.CategoryId == categoryId && x.Enabled);
+                this.BizCategorySerie.AllBy(x =>
+                    x.CategoryId == categoryId &&
+                    x.Enabled &&
+                    // HERE! region filter
+                    x.Assn_CategorySerieProduct.Any(z => z.Product.Assn_ProductRegion.Any(y => y.RegionId == regionId)));
+
+            // Filter only products inside categorie-series by region
+            entities.ForEach(x => {
+                x.Assn_CategorySerieProduct = x.Assn_CategorySerieProduct.Where(y => y.Product.Assn_ProductRegion.Any(z => z.RegionId == regionId)).ToList();
+            });
 
             ViewBag.Title =
                 string.Format(":: Topp Pro Professional Audio {0} ::", controller);

@@ -23,6 +23,7 @@ namespace Topppro.Entities
             this.Downloads = new HashSet<Download>();
             this.Parents = new HashSet<Package>();
             this.Childs = new HashSet<Package>();
+            this.Assn_ProductRegion = new HashSet<Assn_ProductRegion>();
         }
     
         public int ProductId { get; set; }
@@ -46,5 +47,7 @@ namespace Topppro.Entities
         public virtual ICollection<Package> Parents { get; set; }
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Package> Childs { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Assn_ProductRegion> Assn_ProductRegion { get; set; }
     }
 }

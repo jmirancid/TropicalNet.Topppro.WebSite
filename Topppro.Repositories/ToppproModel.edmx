@@ -28,15 +28,11 @@
           <Property Name="Priority" Type="int" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Assn_RegionProduct' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="Assn_RegionProduct">
+        <EntityType Name="Assn_ProductRegion">
           <Key>
-            <PropertyRef Name="AssnRegionProductId" />
-            <PropertyRef Name="RegionId" />
-            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="AssnProductRegionId" />
           </Key>
-          <Property Name="AssnRegionProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssnProductRegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RegionId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
@@ -156,12 +152,9 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Assn_RegionProduct' 
           <Property Name="Draft" Type="bit" Nullable="false" />
           <Property Name="Badge" Type="varchar" MaxLength="6" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Region">
           <Key>
             <PropertyRef Name="RegionId" />
-            <PropertyRef Name="Name" />
           </Key>
           <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
@@ -243,6 +236,30 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene def
             </Principal>
             <Dependent Role="Distributor">
               <PropertyRef Name="CultureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assn_ProductRegion_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Assn_ProductRegion" Type="Self.Assn_ProductRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Assn_ProductRegion">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assn_ProductRegion_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Assn_ProductRegion" Type="Self.Assn_ProductRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Assn_ProductRegion">
+              <PropertyRef Name="RegionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -389,6 +406,7 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene def
         <EntityContainer Name="ToppproRepositoriesStoreContainer">
           <EntitySet Name="Assn_CategorySerie" EntityType="Self.Assn_CategorySerie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assn_CategorySerieProduct" EntityType="Self.Assn_CategorySerieProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assn_ProductRegion" EntityType="Self.Assn_ProductRegion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bullet" EntityType="Self.Bullet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -400,21 +418,8 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene def
           <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Serie" EntityType="Self.Serie" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Assn_RegionProduct" EntityType="Self.Assn_RegionProduct" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Assn_RegionProduct].[AssnRegionProductId] AS [AssnRegionProductId], 
-    [Assn_RegionProduct].[RegionId] AS [RegionId], 
-    [Assn_RegionProduct].[ProductId] AS [ProductId]
-    FROM [dbo].[Assn_RegionProduct] AS [Assn_RegionProduct]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Region" EntityType="Self.Region" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Region].[RegionId] AS [RegionId], 
-    [Region].[Name] AS [Name], 
-    [Region].[Code] AS [Code]
-    FROM [dbo].[Region] AS [Region]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="Assn_CategorySerie_Assn_CategorySerieProduct_FK" Association="Self.Assn_CategorySerie_Assn_CategorySerieProduct_FK">
             <End Role="Assn_CategorySerie" EntitySet="Assn_CategorySerie" />
             <End Role="Assn_CategorySerieProduct" EntitySet="Assn_CategorySerieProduct" />
@@ -438,6 +443,14 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene def
           <AssociationSet Name="FK__Distribut__Cultu__440B1D61" Association="Self.FK__Distribut__Cultu__440B1D61">
             <End Role="Culture" EntitySet="Culture" />
             <End Role="Distributor" EntitySet="Distributor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assn_ProductRegion_Product" Association="Self.FK_Assn_ProductRegion_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Assn_ProductRegion" EntitySet="Assn_ProductRegion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assn_ProductRegion_Region" Association="Self.FK_Assn_ProductRegion_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Assn_ProductRegion" EntitySet="Assn_ProductRegion" />
           </AssociationSet>
           <AssociationSet Name="FK_Download_Culture" Association="Self.FK_Download_Culture">
             <End Role="Culture" EntitySet="Culture" />
@@ -653,6 +666,7 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene def
           <NavigationProperty Name="Model" Relationship="Self.Model_Product_FK" FromRole="Product" ToRole="Model" />
           <NavigationProperty Name="Parents" Relationship="Self.Package_Child_Product_FK" FromRole="Product" ToRole="Package" />
           <NavigationProperty Name="Childs" Relationship="Self.Package_Parent_Product_FK" FromRole="Product" ToRole="Package" />
+          <NavigationProperty Name="Assn_ProductRegion" Relationship="Topppro.Repositories.FK_Assn_ProductRegion_Product" FromRole="Product" ToRole="Assn_ProductRegion" />
         </EntityType>
         <EntityType Name="Serie">
           <Key>
@@ -953,29 +967,61 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene def
             <Parameter Name="AssnCategorySerieProductId" Mode="In" Type="Int32" />
             <Parameter Name="Priority" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Assn_RegionProduct" EntityType="Topppro.Repositories.Assn_RegionProduct" />
           <EntitySet Name="Region" EntityType="Topppro.Repositories.Region" />
-        </EntityContainer>
-        <EntityType Name="Assn_RegionProduct">
-          <Key>
-            <PropertyRef Name="AssnRegionProductId" />
-            <PropertyRef Name="RegionId" />
-            <PropertyRef Name="ProductId" />
-          </Key>
-          <Property Name="AssnRegionProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RegionId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-        </EntityType>
+          <EntitySet Name="Assn_ProductRegion" EntityType="Topppro.Repositories.Assn_ProductRegion" />
+          <AssociationSet Name="FK_Assn_ProductRegion_Product" Association="Topppro.Repositories.FK_Assn_ProductRegion_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Assn_ProductRegion" EntitySet="Assn_ProductRegion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assn_ProductRegion_Region" Association="Topppro.Repositories.FK_Assn_ProductRegion_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Assn_ProductRegion" EntitySet="Assn_ProductRegion" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Region">
           <Key>
             <PropertyRef Name="RegionId" />
-            <PropertyRef Name="Name" />
           </Key>
           <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Assn_ProductRegion" Relationship="Topppro.Repositories.FK_Assn_ProductRegion_Region" FromRole="Region" ToRole="Assn_ProductRegion" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Assn_ProductRegion">
+          <Key>
+            <PropertyRef Name="AssnProductRegionId" />
+          </Key>
+          <Property Name="AssnProductRegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Topppro.Repositories.FK_Assn_ProductRegion_Product" FromRole="Assn_ProductRegion" ToRole="Product" />
+          <NavigationProperty Name="Region" Relationship="Topppro.Repositories.FK_Assn_ProductRegion_Region" FromRole="Assn_ProductRegion" ToRole="Region" />
+        </EntityType>
+        <Association Name="FK_Assn_ProductRegion_Product">
+          <End Type="Topppro.Repositories.Product" Role="Product" Multiplicity="1" />
+          <End Type="Topppro.Repositories.Assn_ProductRegion" Role="Assn_ProductRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Assn_ProductRegion">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assn_ProductRegion_Region">
+          <End Type="Topppro.Repositories.Region" Role="Region" Multiplicity="1" />
+          <End Type="Topppro.Repositories.Assn_ProductRegion" Role="Assn_ProductRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Assn_ProductRegion">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1145,21 +1191,21 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene def
           <FunctionImportMapping FunctionImportName="Assn_CategorySerie_Reorder" FunctionName="Topppro.Repositories.Store.Assn_CategorySerie_Reorder" />
           <FunctionImportMapping FunctionImportName="Assn_CategorySerieProduct_Insert" FunctionName="Topppro.Repositories.Store.Assn_CategorySerieProduct_Insert" />
           <FunctionImportMapping FunctionImportName="Assn_CategorySerieProduct_Reorder" FunctionName="Topppro.Repositories.Store.Assn_CategorySerieProduct_Reorder" />
-          <EntitySetMapping Name="Assn_RegionProduct">
-            <EntityTypeMapping TypeName="Topppro.Repositories.Assn_RegionProduct">
-              <MappingFragment StoreEntitySet="Assn_RegionProduct">
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="AssnRegionProductId" ColumnName="AssnRegionProductId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Region">
             <EntityTypeMapping TypeName="Topppro.Repositories.Region">
               <MappingFragment StoreEntitySet="Region">
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assn_ProductRegion">
+            <EntityTypeMapping TypeName="Topppro.Repositories.Assn_ProductRegion">
+              <MappingFragment StoreEntitySet="Assn_ProductRegion">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="AssnProductRegionId" ColumnName="AssnProductRegionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1184,6 +1230,43 @@ advertencia 6002: La tabla o vista 'tropi23_topppro_net.dbo.Region' no tiene def
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="18d14ca4fd62456789c0b4cb4981fb6a" Name="Diagram1">
+        <EntityTypeShape EntityType="Topppro.Repositories.Assn_CategorySerie" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Assn_CategorySerieProduct" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Attribute" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Bullet" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Category" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Country" Width="1.5" PointX="6" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Culture" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Distributor" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Download" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Model" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Package" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Platform" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Product" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Serie" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="Topppro.Repositories.Assn_CategorySerie_Assn_CategorySerieProduct_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Category_Ass_CategorySerie_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Serie_Assn_CategorySerie_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Product_Assn_CategorySerieProduct_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Culture_Attribute_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Product_Attribute_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Culture_Bullet_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Product_Bullet_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK__Distribut__Count__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK__Distribut__Cultu__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Download_Culture" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Download_Platform" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Download_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Model_Product_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Package_Child_Product_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Package_Parent_Product_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Region" Width="1.5" PointX="6" PointY="17.75" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Assn_ProductRegion" Width="1.5" PointX="8.25" PointY="13.125" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Assn_ProductRegion_Product" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Assn_ProductRegion_Region" />
+        </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>

@@ -3,17 +3,17 @@ using xFNet.Entities;
 
 namespace Topppro.Entities
 {
-    public partial class Assn_RegionProduct : Entity
+    public partial class Assn_ProductRegion : Entity
     {
         public override object Id
         {
             get
             {
-                return AssnRegionProductId;
+                return AssnProductRegionId;
             }
             set
             {
-                AssnRegionProductId = value.To<int>();
+                AssnProductRegionId = value.To<int>();
             }
         }
     }

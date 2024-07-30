@@ -12,10 +12,13 @@ namespace Topppro.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Assn_RegionProduct
+    public partial class Assn_ProductRegion
     {
-        public int AssnRegionProductId { get; set; }
+        public int AssnProductRegionId { get; set; }
         public int RegionId { get; set; }
         public int ProductId { get; set; }
+    
+        public virtual Product Product { get; set; }
+        public virtual Region Region { get; set; }
     }
 }
