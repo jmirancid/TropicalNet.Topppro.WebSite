@@ -23,10 +23,10 @@ namespace Topppro.WebSite.Controllers
         }
 
         [OutputCache(CacheProfile = "Medium")]
-        public virtual ActionResult Index(string region, string controller)
+        public virtual ActionResult Index(string controller)
         {
             var regionId =
-                (int)Enum.Parse(typeof(Topppro.Entities.Region_Enum), region);
+                Topppro.Context.Current.Region.As<int>();
 
             var categoryId =
                 (int)Enum.Parse(typeof(Topppro.Entities.Category_Enum), controller);

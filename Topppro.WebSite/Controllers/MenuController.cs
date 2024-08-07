@@ -2,6 +2,7 @@
 using System.Linq;
 using Topppro.Interfaces.Business;
 using System;
+using xFNet.Common.Extensions;
 
 namespace Topppro.WebSite.Controllers
 {
@@ -21,7 +22,7 @@ namespace Topppro.WebSite.Controllers
         public virtual PartialViewResult Render(string region, string controller)
         {
             var regionId =
-                (int)Enum.Parse(typeof(Topppro.Entities.Region_Enum), region);
+                Topppro.Context.Current.Region.As<int>();
 
             var entities = 
                 this.BizCategorySerieProduct.AllForMenu(x =>

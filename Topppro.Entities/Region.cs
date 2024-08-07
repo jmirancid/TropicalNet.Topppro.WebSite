@@ -18,10 +18,10 @@ namespace Topppro.Entities
         }
     }
 
-    public enum Region_Enum
+    public enum Region_Enum : int
     {
-        am = 1,
-        eu = 2,
-        ai = 3
+        am = 1,     // America
+        eu = 2,     // Europa
+        ao = 3      // Asia
     }
 }

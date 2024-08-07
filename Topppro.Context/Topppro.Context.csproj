@@ -43,5 +43,11 @@
     <Compile Include="Current.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Topppro.Entities\Topppro.Entities.csproj">
+      <Project>{7788b508-e851-4a22-8b60-4f22a2bd5ac6}</Project>
+      <Name>Topppro.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

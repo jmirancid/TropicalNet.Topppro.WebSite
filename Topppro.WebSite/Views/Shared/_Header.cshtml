@@ -5,7 +5,7 @@
     <!-- NAV BAR_MENU -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="\@Topppro.Context.Current.Culture.TwoLetterISOLanguageName">
+            <a class="navbar-brand" href="\@Topppro.Context.Current.Region.ToString()\@Topppro.Context.Current.Culture.TwoLetterISOLanguageName">
                 <div class="col-3 col-md-2">
                     <img src="~/images/topp-logo.png" class="img-fluid d-inline-block" alt="">
                     <h4 class="d-inline-block font-weight-bold ml-2">Topp Pro Audio</h4>
@@ -31,7 +31,10 @@
                         <a class="nav-link text-white pt-1" href="@Url.SwitchCulture()"><img src="@Resources.Global.SwitchToFlag" alt="@Resources.Global.SwitchToCulture" width="32" height="32" /></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="\@Topppro.Context.Current.Culture.TwoLetterISOLanguageName">@Resources.Global.Home</a>
+                        <a class="nav-link text-white" href="\@Topppro.Context.Current.Region.ToString()\@Topppro.Context.Current.Culture.TwoLetterISOLanguageName">@Resources.Global.Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="~/world.html">@Resources.Global.World</a>
                     </li>
                     <!--<li class="nav-item dropdown menu-area">
         <a class="nav-link dropdown-toggle" href="" id="mega-two" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
