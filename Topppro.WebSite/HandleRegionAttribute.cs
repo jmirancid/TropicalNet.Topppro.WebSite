@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using xFNet.Common.Extensions;
 
 namespace Topppro.WebSite
 {
@@ -9,23 +10,18 @@ namespace Topppro.WebSite
         public override void OnActionExecuting(
             ActionExecutingContext filterContext)
         {
-            //string regionName = "am";
-            string regionName =
-                Enum.GetName(typeof(Topppro.Entities.Region_Enum), Context.Current.Region);
+            string regionName;
 
             if (filterContext.RouteData.Values.ContainsKey("region"))
                 regionName = filterContext.RouteData.Values["region"].ToString().ToLower();
+            else
+                regionName = Enum.GetName(typeof(Topppro.Entities.Region_Enum), Topppro.Context.Current.Region);
 
-            if (IsRegionAvailable(regionName) && IsRegionDistinct(regionName))
-            {
-                Topppro.Entities.Region_Enum region;
-
-                var result =
-                    Enum.TryParse<Topppro.Entities.Region_Enum>(regionName, true, out region);
-
-                if (result)
-                    Context.Current.Region = region;
-            }
+            if (IsRegionAvailable(regionName) == false)
+                regionName = Enum.GetName(typeof(Topppro.Entities.Region_Enum), Topppro.Entities.Region_Enum.am);
+            
+            if (IsRegionDistinct(regionName))
+                Topppro.Context.Current.Region = Enum.Parse(typeof(Topppro.Entities.Region_Enum), regionName, true).As<Topppro.Entities.Region_Enum>();
 
             filterContext.RouteData.Values["region"] = regionName;
 
