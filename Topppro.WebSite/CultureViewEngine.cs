@@ -13,10 +13,10 @@ namespace Topppro.WebSite
             var controllerName = (string)controllerContext.RouteData.Values["controller"];
             var culture = Topppro.Context.Current.Culture.TwoLetterISOLanguageName;
 
-            var viewResult = base.FindView(controllerContext, viewName + "." + culture, masterName, useCache);
+            var viewResult = base.FindView(controllerContext, viewName + "." + culture, masterName, false);
 
             if (viewResult.View == null)
-                viewResult = base.FindView(controllerContext, viewName, masterName, useCache);
+                viewResult = base.FindView(controllerContext, viewName, masterName, false);
 
             return viewResult;
         }
@@ -26,10 +26,10 @@ namespace Topppro.WebSite
             var controllerName = (string)controllerContext.RouteData.Values["controller"];
             var culture = Topppro.Context.Current.Culture.TwoLetterISOLanguageName;
 
-            var viewResult = base.FindPartialView(controllerContext, partialViewName + "." + culture, useCache);
+            var viewResult = base.FindPartialView(controllerContext, partialViewName + "." + culture, false);
 
             if (viewResult.View == null)
-                viewResult = base.FindPartialView(controllerContext, partialViewName, useCache);
+                viewResult = base.FindPartialView(controllerContext, partialViewName, false);
 
             return viewResult;
         }
