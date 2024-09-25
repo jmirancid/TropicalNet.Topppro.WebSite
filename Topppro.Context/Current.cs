@@ -3,16 +3,8 @@ using System.Globalization;
 
 namespace Topppro.Context
 {
-    public class Current
+    public class Current : xFNet.Context.Current
     {
-        public static DateTime GetNowUTC
-        {
-            get
-            {
-                return DateTime.UtcNow;
-            }
-        }
-
         public static CultureInfo Culture
         {
             get

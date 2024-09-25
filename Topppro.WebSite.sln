@@ -6,13 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Topppro", "Topppro", "{A0CDEFBE-327F-4005-8D8F-2BD7C200B7D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{F931DB9F-1A66-4997-B17F-81A842AEFC74}"
-	ProjectSection(SolutionItems) = preProject
-		Framework\xFNet.Business.dll = Framework\xFNet.Business.dll
-		Framework\xFNet.Common.dll = Framework\xFNet.Common.dll
-		Framework\xFNet.Entities.dll = Framework\xFNet.Entities.dll
-		Framework\xFNet.Interfaces.dll = Framework\xFNet.Interfaces.dll
-		Framework\xFNet.Repositories.EF6.dll = Framework\xFNet.Repositories.EF6.dll
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B94C264A-85D1-475C-8F59-463B22D2EA7B}"
 	ProjectSection(SolutionItems) = preProject
@@ -36,6 +29,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topppro.Context", "Topppro.Context\Topppro.Context.csproj", "{50088BEE-0728-475E-83FE-C23FA471F7FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topppro.Configuration", "Topppro.Configuration\Topppro.Configuration.csproj", "{E312E50B-FE66-4BA3-9AF9-42A1265CA931}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFNet.Business", "..\xFNet\xFNet.Business\xFNet.Business.csproj", "{E500ECAF-F93A-414E-AEF4-93815E9DAF6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFNet.Common", "..\xFNet\xFNet.Common\xFNet.Common.csproj", "{9671C17B-35F0-48E9-94D8-EAF2895480E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFNet.Entities", "..\xFNet\xFNet.Entities\xFNet.Entities.csproj", "{20A01A93-6A26-4D4D-8F68-EA69732C7F98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFNet.Interfaces", "..\xFNet\xFNet.Interfaces\xFNet.Interfaces.csproj", "{1B2A81E5-CB5B-4AEC-82B5-98C4A908568C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFNet.Repositories.EF6", "..\xFNet\xFNet.Repositories.EF6\xFNet.Repositories.EF6.csproj", "{EBF1E1FB-48F6-407F-88C1-6EABEA3CEEA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFNet.Context", "..\xFNet\xFNet.Context\xFNet.Context.csproj", "{8B782A73-988F-485B-84AF-CB1D75946248}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +80,30 @@ Global
 		{E312E50B-FE66-4BA3-9AF9-42A1265CA931}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E312E50B-FE66-4BA3-9AF9-42A1265CA931}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E312E50B-FE66-4BA3-9AF9-42A1265CA931}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E500ECAF-F93A-414E-AEF4-93815E9DAF6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E500ECAF-F93A-414E-AEF4-93815E9DAF6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E500ECAF-F93A-414E-AEF4-93815E9DAF6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E500ECAF-F93A-414E-AEF4-93815E9DAF6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9671C17B-35F0-48E9-94D8-EAF2895480E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9671C17B-35F0-48E9-94D8-EAF2895480E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9671C17B-35F0-48E9-94D8-EAF2895480E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9671C17B-35F0-48E9-94D8-EAF2895480E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20A01A93-6A26-4D4D-8F68-EA69732C7F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20A01A93-6A26-4D4D-8F68-EA69732C7F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20A01A93-6A26-4D4D-8F68-EA69732C7F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20A01A93-6A26-4D4D-8F68-EA69732C7F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B2A81E5-CB5B-4AEC-82B5-98C4A908568C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B2A81E5-CB5B-4AEC-82B5-98C4A908568C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B2A81E5-CB5B-4AEC-82B5-98C4A908568C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B2A81E5-CB5B-4AEC-82B5-98C4A908568C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF1E1FB-48F6-407F-88C1-6EABEA3CEEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF1E1FB-48F6-407F-88C1-6EABEA3CEEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF1E1FB-48F6-407F-88C1-6EABEA3CEEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF1E1FB-48F6-407F-88C1-6EABEA3CEEA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B782A73-988F-485B-84AF-CB1D75946248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B782A73-988F-485B-84AF-CB1D75946248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B782A73-988F-485B-84AF-CB1D75946248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B782A73-988F-485B-84AF-CB1D75946248}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,10 +118,16 @@ Global
 		{5D357D98-E4CB-49EA-98E4-AAB710E2EC5C} = {A0CDEFBE-327F-4005-8D8F-2BD7C200B7D8}
 		{50088BEE-0728-475E-83FE-C23FA471F7FD} = {A0CDEFBE-327F-4005-8D8F-2BD7C200B7D8}
 		{E312E50B-FE66-4BA3-9AF9-42A1265CA931} = {A0CDEFBE-327F-4005-8D8F-2BD7C200B7D8}
+		{E500ECAF-F93A-414E-AEF4-93815E9DAF6B} = {F931DB9F-1A66-4997-B17F-81A842AEFC74}
+		{9671C17B-35F0-48E9-94D8-EAF2895480E9} = {F931DB9F-1A66-4997-B17F-81A842AEFC74}
+		{20A01A93-6A26-4D4D-8F68-EA69732C7F98} = {F931DB9F-1A66-4997-B17F-81A842AEFC74}
+		{1B2A81E5-CB5B-4AEC-82B5-98C4A908568C} = {F931DB9F-1A66-4997-B17F-81A842AEFC74}
+		{EBF1E1FB-48F6-407F-88C1-6EABEA3CEEA7} = {F931DB9F-1A66-4997-B17F-81A842AEFC74}
+		{8B782A73-988F-485B-84AF-CB1D75946248} = {F931DB9F-1A66-4997-B17F-81A842AEFC74}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 		SolutionGuid = {F83B1A87-BD7F-422E-9EA5-6B4885880FA9}
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Topppro.vsmdi

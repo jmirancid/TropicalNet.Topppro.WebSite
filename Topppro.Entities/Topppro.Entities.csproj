@@ -39,12 +39,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="xFNet.Common">
-      <HintPath>..\Framework\xFNet.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="xFNet.Entities">
-      <HintPath>..\Framework\xFNet.Entities.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assn_CategorySerie.cs" />
@@ -127,6 +121,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\xFNet\xFNet.Common\xFNet.Common.csproj">
+      <Project>{9671c17b-35f0-48e9-94d8-eaf2895480e9}</Project>
+      <Name>xFNet.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xFNet\xFNet.Entities\xFNet.Entities.csproj">
+      <Project>{20a01a93-6a26-4d4d-8f68-ea69732c7f98}</Project>
+      <Name>xFNet.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

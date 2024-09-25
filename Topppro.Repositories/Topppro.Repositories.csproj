@@ -47,19 +47,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="xFNet.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Framework\xFNet.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="xFNet.Entities">
-      <HintPath>..\Framework\xFNet.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="xFNet.Interfaces">
-      <HintPath>..\Framework\xFNet.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="xFNet.Repositories.EF6">
-      <HintPath>..\Framework\xFNet.Repositories.EF6.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Definitions\AssnCategorySerieProductRepository.cs" />
@@ -96,6 +83,22 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\xFNet\xFNet.Common\xFNet.Common.csproj">
+      <Project>{9671c17b-35f0-48e9-94d8-eaf2895480e9}</Project>
+      <Name>xFNet.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xFNet\xFNet.Entities\xFNet.Entities.csproj">
+      <Project>{20a01a93-6a26-4d4d-8f68-ea69732c7f98}</Project>
+      <Name>xFNet.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xFNet\xFNet.Interfaces\xFNet.Interfaces.csproj">
+      <Project>{1b2a81e5-cb5b-4aec-82b5-98c4a908568c}</Project>
+      <Name>xFNet.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xFNet\xFNet.Repositories.EF6\xFNet.Repositories.EF6.csproj">
+      <Project>{ebf1e1fb-48f6-407f-88c1-6eabea3ceea7}</Project>
+      <Name>xFNet.Repositories.EF6</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topppro.Context\Topppro.Context.csproj">
       <Project>{50088bee-0728-475e-83fe-c23fa471f7fd}</Project>
       <Name>Topppro.Context</Name>

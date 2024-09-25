@@ -38,12 +38,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="xFNet.Entities">
-      <HintPath>..\Framework\xFNet.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="xFNet.Interfaces">
-      <HintPath>..\Framework\xFNet.Interfaces.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\IAssnCategorySerieBusiness.cs" />
@@ -79,6 +73,14 @@
     <Compile Include="Repositories\ISerieRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\xFNet\xFNet.Entities\xFNet.Entities.csproj">
+      <Project>{20a01a93-6a26-4d4d-8f68-ea69732c7f98}</Project>
+      <Name>xFNet.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xFNet\xFNet.Interfaces\xFNet.Interfaces.csproj">
+      <Project>{1b2a81e5-cb5b-4aec-82b5-98c4a908568c}</Project>
+      <Name>xFNet.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topppro.Entities\Topppro.Entities.csproj">
       <Project>{7788b508-e851-4a22-8b60-4f22a2bd5ac6}</Project>
       <Name>Topppro.Entities</Name>
