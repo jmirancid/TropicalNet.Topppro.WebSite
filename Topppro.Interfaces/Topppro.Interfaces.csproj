@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Business\IAssnCategorySerieBusiness.cs" />
     <Compile Include="Business\IAssnCategorySerieProductBusiness.cs" />
+    <Compile Include="Business\IAssnProductRegionBusiness.cs" />
     <Compile Include="Business\IAttributeBusiness.cs" />
     <Compile Include="Business\IBulletBusiness.cs" />
     <Compile Include="Business\ICategoryBusiness.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Business\IProductBusiness.cs" />
     <Compile Include="Business\ISerieBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IAssnProductRegionRepository.cs" />
     <Compile Include="Repositories\IAssnCategorySerieProductRepository.cs" />
     <Compile Include="Repositories\IAssnCategorySerieRepository.cs" />
     <Compile Include="Repositories\IAttributeRepository.cs" />

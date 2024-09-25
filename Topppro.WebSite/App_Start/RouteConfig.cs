@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Routing;
+using Topppro.Entities;
 
 namespace Topppro.WebSite
 {
@@ -21,30 +23,30 @@ namespace Topppro.WebSite
 
             routes.MapRoute(
                 name: "HiRes", // Route name
-                url: "{culture}/{controller}/{id}/{name}/HiRes", // URL with parameters
-                defaults: new { culture = Context.Current.Culture.TwoLetterISOLanguageName, action = "HiRes" }, // Parameter defaults
-                constraints: new { culture = "[a-zA-Z]{2}" }
+                url: "{region}/{culture}/{controller}/{id}/{name}/HiRes", // URL with parameters
+                defaults: new { region = Enum.GetName(typeof(Topppro.Entities.Region_Enum), Topppro.Entities.Region_Enum.am), culture = Context.Current.Culture.TwoLetterISOLanguageName, action = "HiRes" }, // Parameter defaults
+                constraints: new { region = "[a-zA-Z]{2}", culture = "[a-zA-Z]{2}" }
             );
 
             routes.MapRoute(
                 name: "Software", // Route name
-                url: "{culture}/{controller}/{id}/{name}/Software", // URL with parameters
-                defaults: new { culture = Context.Current.Culture.TwoLetterISOLanguageName, action = "Software" }, // Parameter defaults
-                constraints: new { culture = "[a-zA-Z]{2}" }
+                url: "{region}/{culture}/{controller}/{id}/{name}/Software", // URL with parameters
+                defaults: new { region = Enum.GetName(typeof(Topppro.Entities.Region_Enum), Topppro.Entities.Region_Enum.am), culture = Context.Current.Culture.TwoLetterISOLanguageName, action = "Software" }, // Parameter defaults
+                constraints: new { region = "[a-zA-Z]{2}", culture = "[a-zA-Z]{2}" }
             );
 
             routes.MapRoute(
                 name: "Detail", // Route name
-                url: "{culture}/{controller}/{id}/{name}", // URL with parameters
-                defaults: new { culture = Context.Current.Culture.TwoLetterISOLanguageName, action = "Detail" }, // Parameter defaults
-                constraints: new { culture = "[a-zA-Z]{2}" }
+                url: "{region}/{culture}/{controller}/{id}/{name}", // URL with parameters
+                defaults: new { region = Enum.GetName(typeof(Topppro.Entities.Region_Enum), Topppro.Entities.Region_Enum.am), culture = Context.Current.Culture.TwoLetterISOLanguageName, action = "Detail" }, // Parameter defaults
+                constraints: new { region = "[a-zA-Z]{2}", culture = "[a-zA-Z]{2}" }
             );
 
             routes.MapRoute(
                 name: "Default",
-                url: "{culture}/{controller}/{action}/{id}",
-                defaults: new { culture = Context.Current.Culture.TwoLetterISOLanguageName, controller = "Home", action = "Index", id = UrlParameter.Optional },
-                constraints: new { culture = "[a-zA-Z]{2}" }
+                url: "{region}/{culture}/{controller}/{action}/{id}",
+                defaults: new { region = Enum.GetName(typeof(Topppro.Entities.Region_Enum), Topppro.Entities.Region_Enum.am), culture = Context.Current.Culture.TwoLetterISOLanguageName, controller = "Home", action = "Index", id = UrlParameter.Optional },
+                constraints: new { region = "[a-zA-Z]{2}", culture = "[a-zA-Z]{2}" }
             );
         }
     }

@@ -9,6 +9,7 @@ namespace Topppro.WebSite
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new HandleCultureAttribute());
+            filters.Add(new HandleRegionAttribute());
         }
     }
 }

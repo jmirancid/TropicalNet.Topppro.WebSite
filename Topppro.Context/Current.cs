@@ -26,5 +26,7 @@ namespace Topppro.Context
                 System.Threading.Thread.CurrentThread.CurrentUICulture = value;
             }
         }
+
+        public static Topppro.Entities.Region_Enum Region { get; set; }
     }
 }
