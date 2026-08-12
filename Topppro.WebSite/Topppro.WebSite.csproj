@@ -126,19 +126,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="xFNet.Business">
-      <HintPath>..\Framework\xFNet.Business.dll</HintPath>
-    </Reference>
-    <Reference Include="xFNet.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Framework\xFNet.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="xFNet.Entities">
-      <HintPath>..\Framework\xFNet.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="xFNet.Interfaces">
-      <HintPath>..\Framework\xFNet.Interfaces.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Diagnostics.DiagnosticSource">
@@ -386,6 +373,22 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\xFNet\xFNet.Business\xFNet.Business.csproj">
+      <Project>{e500ecaf-f93a-414e-aef4-93815e9daf6b}</Project>
+      <Name>xFNet.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xFNet\xFNet.Common\xFNet.Common.csproj">
+      <Project>{9671c17b-35f0-48e9-94d8-eaf2895480e9}</Project>
+      <Name>xFNet.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xFNet\xFNet.Entities\xFNet.Entities.csproj">
+      <Project>{20a01a93-6a26-4d4d-8f68-ea69732c7f98}</Project>
+      <Name>xFNet.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xFNet\xFNet.Interfaces\xFNet.Interfaces.csproj">
+      <Project>{1b2a81e5-cb5b-4aec-82b5-98c4a908568c}</Project>
+      <Name>xFNet.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Topppro.Business\Topppro.Business.csproj">
       <Project>{43fe7d4d-0d10-484e-87d3-8695148c85c2}</Project>
       <Name>Topppro.Business</Name>
