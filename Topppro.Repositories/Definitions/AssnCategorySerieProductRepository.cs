@@ -21,6 +21,18 @@ namespace Topppro.Repositories.Definitions
 
         #region WebSite
 
+        public override IQueryable<Assn_CategorySerieProduct> AllBy(Expression<Func<Assn_CategorySerieProduct, bool>> predicate)
+        {
+            var dbQuery =
+
+                Context.Assn_CategorySerieProduct
+                    .Include(e => e.Assn_CategorySerie)
+                    .Include(e => e.Product)
+                    .Where(predicate);
+
+            return dbQuery;
+        }
+
         //TODO: Include as a paramenter the posibility to add an include list and not have to oaverride allby
         // Used in Menu
         public IQueryable<Assn_CategorySerieProduct> AllForMenu(Expression<Func<Assn_CategorySerieProduct, bool>> predicate)

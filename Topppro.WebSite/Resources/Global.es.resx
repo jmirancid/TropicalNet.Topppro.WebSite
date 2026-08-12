@@ -168,4 +168,7 @@
   <data name="Wireless" xml:space="preserve">
     <value>Sistemas Inalámbricos</value>
   </data>
+  <data name="World" xml:space="preserve">
+    <value>Global</value>
+  </data>
 </root>

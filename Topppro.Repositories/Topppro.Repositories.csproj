@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Definitions\AssnCategorySerieProductRepository.cs" />
     <Compile Include="Definitions\AssnCategorySerieRepository.cs" />
+    <Compile Include="Definitions\AssnProductRegionRepository.cs" />
     <Compile Include="Definitions\AttributeRepository.cs" />
     <Compile Include="Definitions\BulletRepository.cs" />
     <Compile Include="Definitions\CategoryRepository.cs" />
@@ -83,24 +84,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ToppproModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ToppproModel.edmx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ToppproModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ToppproModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <EntityDeploy Include="ToppproModel.edmx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <None Include="ToppproModel.edmx.diagram">
-      <DependentUpon>ToppproModel.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

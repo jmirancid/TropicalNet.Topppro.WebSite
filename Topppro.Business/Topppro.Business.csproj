@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Definitions\AssnCategorySerieBusiness.cs" />
     <Compile Include="Definitions\AssnCategorySerieProductBusiness.cs" />
+    <Compile Include="Definitions\AssnProductRegionBusiness.cs" />
     <Compile Include="Definitions\AttributeBusiness.cs" />
     <Compile Include="Definitions\BulletBusiness.cs" />
     <Compile Include="Definitions\CategoryBusiness.cs" />

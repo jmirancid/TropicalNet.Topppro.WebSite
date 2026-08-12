@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Topppro.Repositories.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Topppro.Repositories.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Assn_CategorySerie">
           <Key>
             <PropertyRef Name="AssnCategorySerieId" />
@@ -27,6 +27,14 @@
           <Property Name="AllowCompare" Type="bit" Nullable="false" />
           <Property Name="Priority" Type="int" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Assn_ProductRegion">
+          <Key>
+            <PropertyRef Name="AssnProductRegionId" />
+          </Key>
+          <Property Name="AssnProductRegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Attribute">
           <Key>
@@ -144,6 +152,14 @@
           <Property Name="Draft" Type="bit" Nullable="false" />
           <Property Name="Badge" Type="varchar" MaxLength="6" />
         </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="2" />
+        </EntityType>
         <EntityType Name="Serie">
           <Key>
             <PropertyRef Name="SerieId" />
@@ -199,7 +215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Distribut__Count__7F2BE32F">
+        <Association Name="FK__Distribut__Count__4316F928">
           <End Role="Country" Type="Self.Country" Multiplicity="1" />
           <End Role="Distributor" Type="Self.Distributor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -211,7 +227,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Distribut__Cultu__00200768">
+        <Association Name="FK__Distribut__Cultu__440B1D61">
           <End Role="Culture" Type="Self.Culture" Multiplicity="1" />
           <End Role="Distributor" Type="Self.Distributor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -220,6 +236,30 @@
             </Principal>
             <Dependent Role="Distributor">
               <PropertyRef Name="CultureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assn_ProductRegion_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Assn_ProductRegion" Type="Self.Assn_ProductRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Assn_ProductRegion">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assn_ProductRegion_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Assn_ProductRegion" Type="Self.Assn_ProductRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Assn_ProductRegion">
+              <PropertyRef Name="RegionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -366,6 +406,7 @@
         <EntityContainer Name="ToppproRepositoriesStoreContainer">
           <EntitySet Name="Assn_CategorySerie" EntityType="Self.Assn_CategorySerie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Assn_CategorySerieProduct" EntityType="Self.Assn_CategorySerieProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assn_ProductRegion" EntityType="Self.Assn_ProductRegion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bullet" EntityType="Self.Bullet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -377,6 +418,7 @@
           <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Platform" EntityType="Self.Platform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Serie" EntityType="Self.Serie" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Assn_CategorySerie_Assn_CategorySerieProduct_FK" Association="Self.Assn_CategorySerie_Assn_CategorySerieProduct_FK">
             <End Role="Assn_CategorySerie" EntitySet="Assn_CategorySerie" />
@@ -394,13 +436,21 @@
             <End Role="Culture" EntitySet="Culture" />
             <End Role="Bullet" EntitySet="Bullet" />
           </AssociationSet>
-          <AssociationSet Name="FK__Distribut__Count__7F2BE32F" Association="Self.FK__Distribut__Count__7F2BE32F">
+          <AssociationSet Name="FK__Distribut__Count__4316F928" Association="Self.FK__Distribut__Count__4316F928">
             <End Role="Country" EntitySet="Country" />
             <End Role="Distributor" EntitySet="Distributor" />
           </AssociationSet>
-          <AssociationSet Name="FK__Distribut__Cultu__00200768" Association="Self.FK__Distribut__Cultu__00200768">
+          <AssociationSet Name="FK__Distribut__Cultu__440B1D61" Association="Self.FK__Distribut__Cultu__440B1D61">
             <End Role="Culture" EntitySet="Culture" />
             <End Role="Distributor" EntitySet="Distributor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assn_ProductRegion_Product" Association="Self.FK_Assn_ProductRegion_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Assn_ProductRegion" EntitySet="Assn_ProductRegion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assn_ProductRegion_Region" Association="Self.FK_Assn_ProductRegion_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Assn_ProductRegion" EntitySet="Assn_ProductRegion" />
           </AssociationSet>
           <AssociationSet Name="FK_Download_Culture" Association="Self.FK_Download_Culture">
             <End Role="Culture" EntitySet="Culture" />
@@ -616,6 +666,7 @@
           <NavigationProperty Name="Model" Relationship="Self.Model_Product_FK" FromRole="Product" ToRole="Model" />
           <NavigationProperty Name="Parents" Relationship="Self.Package_Child_Product_FK" FromRole="Product" ToRole="Package" />
           <NavigationProperty Name="Childs" Relationship="Self.Package_Parent_Product_FK" FromRole="Product" ToRole="Package" />
+          <NavigationProperty Name="Assn_ProductRegion" Relationship="Topppro.Repositories.FK_Assn_ProductRegion_Product" FromRole="Product" ToRole="Assn_ProductRegion" />
         </EntityType>
         <EntityType Name="Serie">
           <Key>
@@ -916,8 +967,61 @@
             <Parameter Name="AssnCategorySerieProductId" Mode="In" Type="Int32" />
             <Parameter Name="Priority" Mode="In" Type="Int32" />
           </FunctionImport>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="Region" EntityType="Topppro.Repositories.Region" />
+          <EntitySet Name="Assn_ProductRegion" EntityType="Topppro.Repositories.Assn_ProductRegion" />
+          <AssociationSet Name="FK_Assn_ProductRegion_Product" Association="Topppro.Repositories.FK_Assn_ProductRegion_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Assn_ProductRegion" EntitySet="Assn_ProductRegion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Assn_ProductRegion_Region" Association="Topppro.Repositories.FK_Assn_ProductRegion_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Assn_ProductRegion" EntitySet="Assn_ProductRegion" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Assn_ProductRegion" Relationship="Topppro.Repositories.FK_Assn_ProductRegion_Region" FromRole="Region" ToRole="Assn_ProductRegion" />
+        </EntityType>
+        <EntityType Name="Assn_ProductRegion">
+          <Key>
+            <PropertyRef Name="AssnProductRegionId" />
+          </Key>
+          <Property Name="AssnProductRegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Topppro.Repositories.FK_Assn_ProductRegion_Product" FromRole="Assn_ProductRegion" ToRole="Product" />
+          <NavigationProperty Name="Region" Relationship="Topppro.Repositories.FK_Assn_ProductRegion_Region" FromRole="Assn_ProductRegion" ToRole="Region" />
+        </EntityType>
+        <Association Name="FK_Assn_ProductRegion_Product">
+          <End Type="Topppro.Repositories.Product" Role="Product" Multiplicity="1" />
+          <End Type="Topppro.Repositories.Assn_ProductRegion" Role="Assn_ProductRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Assn_ProductRegion">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Assn_ProductRegion_Region">
+          <End Type="Topppro.Repositories.Region" Role="Region" Multiplicity="1" />
+          <End Type="Topppro.Repositories.Assn_ProductRegion" Role="Assn_ProductRegion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Assn_ProductRegion">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1087,6 +1191,24 @@
           <FunctionImportMapping FunctionImportName="Assn_CategorySerie_Reorder" FunctionName="Topppro.Repositories.Store.Assn_CategorySerie_Reorder" />
           <FunctionImportMapping FunctionImportName="Assn_CategorySerieProduct_Insert" FunctionName="Topppro.Repositories.Store.Assn_CategorySerieProduct_Insert" />
           <FunctionImportMapping FunctionImportName="Assn_CategorySerieProduct_Reorder" FunctionName="Topppro.Repositories.Store.Assn_CategorySerieProduct_Reorder" />
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="Topppro.Repositories.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assn_ProductRegion">
+            <EntityTypeMapping TypeName="Topppro.Repositories.Assn_ProductRegion">
+              <MappingFragment StoreEntitySet="Assn_ProductRegion">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="AssnProductRegionId" ColumnName="AssnProductRegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1108,6 +1230,43 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="18d14ca4fd62456789c0b4cb4981fb6a" Name="Diagram1">
+        <EntityTypeShape EntityType="Topppro.Repositories.Assn_CategorySerie" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Assn_CategorySerieProduct" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Attribute" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Bullet" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Category" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Country" Width="1.5" PointX="6" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Culture" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Distributor" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Download" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Model" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Package" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Platform" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Product" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Serie" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <AssociationConnector Association="Topppro.Repositories.Assn_CategorySerie_Assn_CategorySerieProduct_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Category_Ass_CategorySerie_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Serie_Assn_CategorySerie_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Product_Assn_CategorySerieProduct_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Culture_Attribute_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Product_Attribute_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Culture_Bullet_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Product_Bullet_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK__Distribut__Count__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK__Distribut__Cultu__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Download_Culture" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Download_Platform" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Download_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Model_Product_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Package_Child_Product_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Topppro.Repositories.Package_Parent_Product_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Region" Width="1.5" PointX="6" PointY="17.75" />
+        <EntityTypeShape EntityType="Topppro.Repositories.Assn_ProductRegion" Width="1.5" PointX="8.25" PointY="13.125" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Assn_ProductRegion_Product" />
+        <AssociationConnector Association="Topppro.Repositories.FK_Assn_ProductRegion_Region" />
+        </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>

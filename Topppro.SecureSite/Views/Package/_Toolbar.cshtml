@@ -1,8 +1,0 @@
-﻿@using Framework.MVC.Resources
-@using Topppro.Entities.Resources
-
-<p>
-    @Html.ActionLink(string.Format("{0} {1}", PersistanceResource.Add, Ent_PackageResource.Entity_ChildProduct), "Create", "Package", new { id = ViewBag.ParentProductId },
-        new { @class = "btn btn-primary editor-dialog", @role = "button", @type = "type-warning", @title = string.Format("{0} {1}", PersistanceResource.Add, Ent_PackageResource.Entity_ChildProduct) })
-</p>
-
